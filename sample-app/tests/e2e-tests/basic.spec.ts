@@ -4,11 +4,10 @@ test("input + toast works", async ({ page }) => {
   await page.goto("/");
 
   const input = page.locator("input");
-  const button = page.locator("button");
+  const button = page.getByRole("button", { name: "Show Toast" });
 
   await input.fill("Hello");
   await button.click();
 
-  const toast = page.locator(".react-hot-toast");
-  await expect(toast).toContainText("Hello");
+  await expect(page.getByText("You typed: Hello")).toBeVisible();
 });
